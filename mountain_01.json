@@ -1,0 +1,87 @@
+{
+  "version": 8,
+  "name": "Empty Style",
+  "metadata": {},
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3-openmaptiles/tiles.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL"
+    }
+  },
+  "sprite": "",
+  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "bg",
+      "type": "background",
+      "layout": {"visibility": "visible"},
+      "paint": {"background-color": "rgba(210, 210, 210, 1)"}
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "water",
+      "paint": {"fill-color": "rgba(115, 160, 216, 1)"}
+    },
+    {
+      "id": "boundary",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "minzoom": 0,
+      "maxzoom": 8,
+      "layout": {"visibility": "visible"}
+    },
+    {
+      "id": "mountain_point",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "mountain_peak",
+      "filter": ["all", ["has", "name"], ["!=", ["get", "name"], ""]],
+      "layout": {
+        "text-field": ".",
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-size": 30
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      }
+    },
+    {
+      "id": "mountain_name",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "mountain_peak",
+      "filter": ["all", ["has", "name"], ["!=", ["get", "name"], ""]],
+      "layout": {"text-field": "{name} - {ele}m", "visibility": "visible"},
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      }
+    },
+    {
+      "id": "path",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": ["all", ["==", "class", "path"]],
+      "paint": {
+        "line-color": "rgba(28, 17, 0, 1)",
+        "line-width": 2,
+        "line-dasharray": [1, 0.5]
+      }
+    },
+    {
+      "id": "contour",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "contour"
+    }
+  ],
+  "id": "ovzgd3d"
+}
