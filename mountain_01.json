@@ -46,7 +46,8 @@
       "id": "mountain",
       "type": "circle",
       "source": "openmaptiles",
-      "source-layer": "mountain_peak"
+      "source-layer": "mountain_peak",
+      "filter": ["all", ["==", "class", "peak"]]
     }
   ],
   "id": "iujj30i"
