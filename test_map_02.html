@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MapLibre GL JS + OpenFreeMap</title>
+
+<!-- MapLibre GL JS (from CDN) -->
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  /* Simple info panel in the corner */
+  .info-panel {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 10px 14px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 240px;
+  }
+
+  .info-panel strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="info-panel">
+  <strong>MapLibre + OpenFreeMap</strong>
+  Free vector basemap, no API key required.
+</div>
+
+<script>
+  const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://raw.githubusercontent.com/AidanKayGIS/mountain_01/refs/heads/main/mountain_01.json',
+  center: [-3.1883, 55.9533],
+  zoom: 10,
+});
+
+  // Standard navigation controls (zoom +/-, compass)
+  map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+  // Shows the user's current location if they grant permission
+  map.addControl(
+    new maplibregl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true,
+    }),
+    'top-right'
+  );
+
+  map.on('load', () => {
+    map.resize();
+  });
+
+  map.on('error', (e) => {
+    console.log('MAP ERROR OBJECT:', e);
+    console.log('ERROR:', e.error);
+    console.log('MESSAGE:', e.error?.message);
+    console.log('STATUS:', e.error?.status);
+    console.log('URL:', e.error?.url);
+  });
+
+  // Example marker
+  new maplibregl.Marker({ color: '#e63946' })
+    .setLngLat([-3.1883, 55.9533])
+    .setPopup(new maplibregl.Popup().setHTML('<strong>Edinburgh</strong><br>Change this to your own location.'))
+    .addTo(map);
+
+  
+</script>
+
+</body>
+</html>
