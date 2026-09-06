@@ -69,7 +69,7 @@
       "type": "line",
       "source": "openmaptiles",
       "source-layer": "transportation",
-      "filter": ["all", ["==", "class", "path"]],
+      "filter": ["==", ["get", "class"], "path"],
       "paint": {
         "line-color": "rgba(28, 17, 0, 1)",
         "line-width": 2,
@@ -77,10 +77,11 @@
       }
     },
     {
-      "id": "",
+      "id": "landcover",
       "type": "fill",
       "source": "openmaptiles",
-      "source-layer": "landcover"
+      "source-layer": "landcover",
+      "paint": {"fill-color": "rgba(38, 80, 45, 1)"}
     }
   ],
   "id": "ovzgd3d"
