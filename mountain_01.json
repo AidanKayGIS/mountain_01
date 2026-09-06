@@ -77,12 +77,6 @@
       }
     },
     {
-      "id": "contour",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "contour"
-    },
-    {
       "id": "",
       "type": "fill",
       "source": "openmaptiles",
