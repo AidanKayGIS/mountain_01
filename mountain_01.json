@@ -7,7 +7,7 @@
       "url": "https://api.maptiler.com/tiles/v3-openmaptiles/tiles.json?key=a4FQuiCXJ9xqjkaq7RI2"
     }
   },
-  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
+  "glyphs": "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
