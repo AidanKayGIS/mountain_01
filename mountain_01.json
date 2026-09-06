@@ -1,28 +1,38 @@
 {
   "version": 8,
-  "name": "Empty Style",
-  "metadata": {"maputnik:renderer": "mlgljs"},
+  "name": "Mountain Map",
   "sources": {
     "openmaptiles": {
       "type": "vector",
       "url": "https://api.maptiler.com/tiles/v3-openmaptiles/tiles.json?key=a4FQuiCXJ9xqjkaq7RI2"
     }
   },
-  "sprite": "",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
-      "id": "bg",
+      "id": "background",
       "type": "background",
-      "layout": {"visibility": "visible"},
-      "paint": {"background-color": "rgba(210, 210, 210, 1)"}
+      "paint": {
+        "background-color": "#d2d2d2"
+      }
     },
     {
       "id": "water",
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "water",
-      "paint": {"fill-color": "rgba(115, 160, 216, 1)"}
+      "paint": {
+        "fill-color": "#73a0d8"
+      }
+    },
+    {
+      "id": "landcover",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landcover",
+      "paint": {
+        "fill-color": "#d8e0c8"
+      }
     },
     {
       "id": "boundary",
@@ -31,37 +41,9 @@
       "source-layer": "boundary",
       "minzoom": 0,
       "maxzoom": 8,
-      "layout": {"visibility": "visible"}
-    },
-    {
-      "id": "mountain_point",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "mountain_peak",
-      "filter": ["all", ["has", "name"], ["!=", ["get", "name"], ""]],
-      "layout": {
-        "text-field": ".",
-        "text-allow-overlap": true,
-        "text-ignore-placement": true,
-        "text-size": 30
-      },
       "paint": {
-        "text-color": "rgba(0, 0, 0, 1)",
-        "text-halo-color": "rgba(255, 255, 255, 1)",
-        "text-halo-width": 2
-      }
-    },
-    {
-      "id": "mountain_name",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "mountain_peak",
-      "filter": ["all", ["has", "name"], ["!=", ["get", "name"], ""]],
-      "layout": {"text-field": "{name} - {ele}m", "visibility": "visible"},
-      "paint": {
-        "text-color": "rgba(0, 0, 0, 1)",
-        "text-halo-color": "rgba(255, 255, 255, 1)",
-        "text-halo-width": 2
+        "line-color": "#777777",
+        "line-width": 1
       }
     },
     {
@@ -69,20 +51,47 @@
       "type": "line",
       "source": "openmaptiles",
       "source-layer": "transportation",
-      "filter": ["==", ["get", "class"], "path"],
+      "filter": [
+        "==",
+        ["get", "class"],
+        "path"
+      ],
       "paint": {
-        "line-color": "rgba(28, 17, 0, 1)",
+        "line-color": "#1c1100",
         "line-width": 2,
         "line-dasharray": [1, 0.5]
       }
     },
     {
-      "id": "landcover",
-      "type": "fill",
+      "id": "mountain_name",
+      "type": "symbol",
       "source": "openmaptiles",
-      "source-layer": "landcover",
-      "paint": {"fill-color": "rgba(38, 80, 45, 1)"}
+      "source-layer": "mountain_peak",
+      "filter": [
+        "all",
+        ["has", "name"],
+        ["!=", ["get", "name"], ""]
+      ],
+      "layout": {
+        "text-field": [
+          "case",
+          ["has", "ele"],
+          [
+            "concat",
+            ["get", "name"],
+            " - ",
+            ["to-string", ["get", "ele"]],
+            "m"
+          ],
+          ["get", "name"]
+        ],
+        "text-size": 12
+      },
+      "paint": {
+        "text-color": "#000000",
+        "text-halo-color": "#ffffff",
+        "text-halo-width": 2
+      }
     }
-  ],
-  "id": "ovzgd3d"
+  ]
 }
