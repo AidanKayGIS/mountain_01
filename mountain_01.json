@@ -57,5 +57,11 @@
         "line-width": 2
       }
     }
+  {
+    "id": "mountain",
+    "type": "circle",
+    "source": "openmaptiles",
+    "source-layer": "mountain_peak"
+  }
   ]
 }
